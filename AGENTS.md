@@ -9,13 +9,13 @@
 every testing file should have roughly the same setup.
 
 ```lua
--- In this example we are testing the visual function for 99 requests
+-- In this example we are testing the visual function for co requests
 -- test utils has utilities to setup buffers and request context and
 -- test providers that we can control when to resolve
 -- test utils also has functions to schedule syncronously, very powerful
-local _99 = require("99")
-local test_utils = require("99.test.test_utils")
-local visual_fn = require("99.ops.over-range")
+local co = require("co")
+local test_utils = require("co.test.test_utils")
+local visual_fn = require("co.ops.over-range")
 -- ... imports that need to be tested
 
 describe("<name of test group>", function()
@@ -23,7 +23,7 @@ describe("<name of test group>", function()
     it("specific test condition", function()
         -- we setup the world with test provider, context, and state
         local p, buffer, range = setup(content, 2, 1, 2, 23)
-        local state = _99.__get_state()
+        local state = co.__get_state()
         local context = Prompt.visual(state)
 
         -- now this test is simple, its just proving that we keep track
